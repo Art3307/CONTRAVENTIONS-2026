@@ -35,37 +35,37 @@ const { useState, useEffect } = React;
 
 // ─── DONNÉES PAR DÉFAUT ───────────────────────────────────────────────────────
 const DEFAULT_DATA = [
-  { id:1,  lien_pv:"", lien_denonciation:"", conducteur:"CELTON Pierre",  vehicule:"GN-484-RR",  agence:"CMR BARON", lieu:"Paris",             date:"2025-12-29", type:"Stationnement", detail:"Stationnement",            points:0, cout:35,   statut:"Payée",     info:"PAYEE LE 20/01",                                        commentaire:"" },
-  { id:2,  lien_pv:"", lien_denonciation:"", conducteur:"LALEVE Christophe",  vehicule:"GH-367-JV",  agence:"CA CANA",   lieu:"Le Taillan Médoc",  date:"2026-11-22", type:"Vitesse",       detail:"73/70 km/h",               points:0, cout:45,   statut:"Dénoncée",  info:"MAIL CHRISTOPHE LE 20/01 - DENONCE LE /",               commentaire:"" },
-  { id:3,  lien_pv:"", lien_denonciation:"", conducteur:"BARKATE Jonathan",  vehicule:"HB-847-GG",  agence:"EMP",       lieu:"Vic Fezensac",      date:"2026-11-26", type:"Vitesse",       detail:"83/80 km/h",               points:0, cout:45,   statut:"Dénoncée",  info:"MAIL LUCIE LE 22/01 - DENONCE LE /",                    commentaire:"" },
-  { id:4,  lien_pv:"", lien_denonciation:"", conducteur:"MORICE Julien",  vehicule:"BH-276-NV",  agence:"SST",       lieu:"St Jean de Luz",    date:"2025-12-24", type:"Vitesse",       detail:"71/70 km/h",               points:0, cout:45,   statut:"Dénoncée",  info:"MAIL LABUZAN + PAUVIF LE 22/01 - DENONCE LE /",         commentaire:"" },
-  { id:5,  lien_pv:"", lien_denonciation:"", conducteur:"DUBOS Vincent",  vehicule:"GF-91-VW",   agence:"ESA",       lieu:"Bayonne",           date:"2026-01-19", type:"Stationnement", detail:"Stationnement",            points:0, cout:31.3, statut:"Payée",     info:"PAYEE LE 25/02",                                        commentaire:"" },
-  { id:6,  lien_pv:"", lien_denonciation:"", conducteur:"BOUHOT Olivier",  vehicule:"GR-282-QS",  agence:"EMP",       lieu:"Toulouse",          date:"2026-01-02", type:"Vitesse",       detail:"52/50 km/h",               points:0, cout:90,   statut:"Dénoncée",  info:"DENONCE LE 05/02",                                      commentaire:"" },
-  { id:7,  lien_pv:"", lien_denonciation:"", conducteur:"GUERIN Benjamin",  vehicule:"GW-057-NQ",  agence:"CA CANA",   lieu:"Taillan Médoc",     date:"2026-11-26", type:"Vitesse",       detail:"99/70 km/h",               points:2, cout:90,   statut:"Dénoncée",  info:"DENONCE LE 10/02",                                      commentaire:"" },
-  { id:8,  lien_pv:"", lien_denonciation:"", conducteur:"RIORD Adrien",  vehicule:"GX-024-XJ",  agence:"CA RESO",   lieu:"Trensacq",          date:"2026-01-21", type:"Vitesse",       detail:"108/80 km/h",              points:2, cout:90,   statut:"Dénoncée",  info:"DENONCE LE 29/01",                                      commentaire:"" },
-  { id:9,  lien_pv:"", lien_denonciation:"", conducteur:"RIORD Adrien",  vehicule:"GX-024-XJ",  agence:"CA RESO",   lieu:"Hontanx",           date:"2026-01-21", type:"Vitesse",       detail:"102/80 km/h",              points:2, cout:90,   statut:"Dénoncée",  info:"DENONCE LE 29/01",                                      commentaire:"" },
-  { id:10, lien_pv:"", lien_denonciation:"", conducteur:"RIORD Adrien",  vehicule:"GX-024-XJ",  agence:"CA RESO",   lieu:"Trensacq",          date:"2026-01-22", type:"Vitesse",       detail:"82/80 km/h",               points:0, cout:45,   statut:"Dénoncée",  info:"DENONCE LE 04/02",                                      commentaire:"" },
-  { id:11, lien_pv:"", lien_denonciation:"", conducteur:"RIORD Adrien",  vehicule:"GX-024-XJ",  agence:"CA RESO",   lieu:"Trensacq",          date:"2026-01-23", type:"Vitesse",       detail:"82/80 km/h",               points:0, cout:45,   statut:"Dénoncée",  info:"DENONCE LE 04/02",                                      commentaire:"" },
-  { id:12, lien_pv:"", lien_denonciation:"", conducteur:"LOURENCO CORREIA Joao",  vehicule:"GX-489-WD",  agence:"CA BASSIN", lieu:"Lanton",            date:"2026-01-15", type:"Vitesse",       detail:"82/80 km/h",               points:0, cout:45,   statut:"Dénoncée",  info:"DENONCE LE 10/02",                                      commentaire:"" },
-  { id:13, lien_pv:"", lien_denonciation:"", conducteur:"DESCHAMPS Gilles",  vehicule:"HB-889-GG",  agence:"EMP",       lieu:"Toulouse",          date:"",           type:"Stationnement", detail:"Majoration stationnement",  points:0, cout:64,   statut:"Payée",     info:"PAYEE LE 01/03",                                        commentaire:"" },
-  { id:14, lien_pv:"", lien_denonciation:"", conducteur:"DESCHAMPS Gilles",  vehicule:"HB-889-GG",  agence:"EMP",       lieu:"Toulouse",          date:"",           type:"Stationnement", detail:"Majoration stationnement",  points:0, cout:64,   statut:"Payée",     info:"PAYEE LE 01/03",                                        commentaire:"" },
-  { id:15, lien_pv:"", lien_denonciation:"", conducteur:"DESCHAMPS Gilles",  vehicule:"HB-889-GG",  agence:"EMP",       lieu:"Toulouse",          date:"",           type:"Stationnement", detail:"Majoration stationnement",  points:0, cout:64,   statut:"Payée",     info:"PAYEE LE 01/03",                                        commentaire:"" },
-  { id:16, lien_pv:"", lien_denonciation:"", conducteur:"FERRANDO Roger",  vehicule:"GT-897-NE",  agence:"EMP",       lieu:"Toulouse",          date:"",           type:"Stationnement", detail:"Majoration stationnement",  points:0, cout:64,   statut:"Payée",     info:"PAYEE LE 19/02",                                        commentaire:"" },
-  { id:17, lien_pv:"", lien_denonciation:"", conducteur:"DUBOS Vincent",  vehicule:"GF-91-VW",   agence:"ESA",       lieu:"Bayonne",           date:"2026-12-15", type:"Stationnement", detail:"Stationnement",            points:0, cout:135,  statut:"Contestée", info:"CONTESTATION LE 16/02 - Relance Patricia 25/02",        commentaire:"" },
-  { id:18, lien_pv:"", lien_denonciation:"", conducteur:"DEBROUWERE Gwendoline",  vehicule:"FZ-432-RR",  agence:"AQUALIS",   lieu:"Pessac",            date:"2026-02-06", type:"Vitesse",       detail:"81/80 km/h",               points:0, cout:45,   statut:"Dénoncée",  info:"DENONCE LE 19/02",                                      commentaire:"" },
-  { id:19, lien_pv:"", lien_denonciation:"", conducteur:"AGUILAR Thierry",  vehicule:"HD-175-LD",  agence:"CA RESO",   lieu:"Mérignac",          date:"2026-01-14", type:"Vitesse",       detail:"95/90 km/h",               points:1, cout:45,   statut:"Dénoncée",  info:"DENONCE LE 25/02",                                      commentaire:"" },
-  { id:20, lien_pv:"", lien_denonciation:"", conducteur:"BERNAOLA Thomas",  vehicule:"GK-378-PF",  agence:"CA RESO",   lieu:"St Laurent Arce",   date:"2025-06-06", type:"Vitesse",       detail:"84/80 km/h",               points:0, cout:45,   statut:"Dénoncée",  info:"DENONCE LE 25/02",                                      commentaire:"" },
-  { id:21, lien_pv:"", lien_denonciation:"", conducteur:"OUSSET Cédric",  vehicule:"HD-265-KW",  agence:"EMP",       lieu:"Portet/Garonne",    date:"2026-02-10", type:"Vitesse",       detail:"57/50 km/h",               points:1, cout:90,   statut:"Dénoncée",  info:"DENONCE LE 02/03",                                      commentaire:"" },
-  { id:22, lien_pv:"", lien_denonciation:"", conducteur:"EMP (véhicule)",  vehicule:"GM-246-LR",  agence:"EMP",       lieu:"Toulouse",          date:"2026-02-06", type:"Stationnement", detail:"Stationnement",            points:0, cout:135,  statut:"En cours",  info:"MAIL LUCIE LE 25/02 - conducteur non identifié",        commentaire:"" },
-  { id:23, lien_pv:"", lien_denonciation:"", conducteur:"BLIN Benjamin",  vehicule:"GC-855-MP",  agence:"EMP",       lieu:"Toulouse",          date:"2026-02-06", type:"Stationnement", detail:"Stationnement",            points:0, cout:30,   statut:"En cours",  info:"MAIL LUCIE LE 02/03",                                   commentaire:"" },
-  { id:24, lien_pv:"", lien_denonciation:"", conducteur:"LALEVE Christophe",  vehicule:"GH-367-JV",  agence:"CA CANA",   lieu:"Eaux-Bonnes",       date:"2026-01-25", type:"Stationnement", detail:"Stationnement",            points:0, cout:35,   statut:"En cours",  info:"MAIL CHRISTOPHE LE 27/02 - Relance le 04/03",           commentaire:"" },
-  { id:25, lien_pv:"", lien_denonciation:"", conducteur:"CMR BARON",  vehicule:"FJ-267-NQ",  agence:"CMR BARON", lieu:"St Denis de Pile",  date:"2026-02-18", type:"Vitesse",       detail:"62/50 km/h",               points:1, cout:90,   statut:"Dénoncée",  info:"DENONCE LE 02/03",                                      commentaire:"" },
-  { id:26, lien_pv:"", lien_denonciation:"", conducteur:"BLIN Benjamin",  vehicule:"GC-855-MP",  agence:"EMP",       lieu:"Coulommiers",       date:"2026-02-18", type:"Stationnement", detail:"Stationnement",            points:0, cout:35,   statut:"En cours",  info:"MAIL LUCIE LE 02/03",                                   commentaire:"" },
-  { id:27, lien_pv:"", lien_denonciation:"", conducteur:"ZENGUINIAN Antoine",  vehicule:"GX-882-XH",  agence:"CA RESO",   lieu:"Hontanx",           date:"2026-02-18", type:"Vitesse",       detail:"82/80 km/h",               points:0, cout:45,   statut:"Dénoncée",  info:"DENONCE LE 02/03",                                      commentaire:"" },
-  { id:28, lien_pv:"", lien_denonciation:"", conducteur:"MARTINS Victor",  vehicule:"GR-608-HH",  agence:"EMP",       lieu:"Villematier",       date:"2026-02-13", type:"Vitesse",       detail:"88/80 km/h",               points:1, cout:45,   statut:"En cours",  info:"MAIL LUCIE LE 02/03",                                   commentaire:"" },
-  { id:29, lien_pv:"", lien_denonciation:"", conducteur:"DESCHAMPS Gilles",  vehicule:"HB-889-GG",  agence:"EMP",       lieu:"Toulouse",          date:"",           type:"Stationnement", detail:"Majoration stationnement",  points:0, cout:64,   statut:"En cours",  info:"MAIL LUCIE LE 25/02 - relance le 04/03",                commentaire:"" },
-  { id:"a1", lien_pv:"", lien_denonciation:"", conducteur:"CAZARD Ludovic",  vehicule:"HB-840-GG", agence:"EMP", lieu:"Toulouse", date:"2025-11-21", type:"Stationnement", detail:"Stationnement piste cyclable", points:0, cout:135, statut:"Annulée", info:"CONTESTATION ARRETE LE 21/01", commentaire:"" },
-  { id:"a2", lien_pv:"", lien_denonciation:"", conducteur:"CAZARD Ludovic",  vehicule:"HB-840-GG", agence:"EMP", lieu:"Toulouse", date:"2025-11-21", type:"Stationnement", detail:"Stationnement trottoir",        points:0, cout:135, statut:"Annulée", info:"CONTESTATION ARRETE LE 21/01", commentaire:"" },
+  { id:1,  lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"CELTON Pierre",  vehicule:"GN-484-RR",  agence:"CMR BARON", lieu:"Paris",             date:"2025-12-29", type:"Stationnement", detail:"Stationnement",            points:0, cout:35,   statut:"Payée",     info:"PAYEE LE 20/01",                                        commentaire:"" },
+  { id:2,  lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"LALEVE Christophe",  vehicule:"GH-367-JV",  agence:"CA CANA",   lieu:"Le Taillan Médoc",  date:"2026-11-22", type:"Vitesse",       detail:"73/70 km/h",               points:0, cout:45,   statut:"Dénoncée",  info:"MAIL CHRISTOPHE LE 20/01 - DENONCE LE /",               commentaire:"" },
+  { id:3,  lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"BARKATE Jonathan",  vehicule:"HB-847-GG",  agence:"EMP",       lieu:"Vic Fezensac",      date:"2026-11-26", type:"Vitesse",       detail:"83/80 km/h",               points:0, cout:45,   statut:"Dénoncée",  info:"MAIL LUCIE LE 22/01 - DENONCE LE /",                    commentaire:"" },
+  { id:4,  lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"MORICE Julien",  vehicule:"BH-276-NV",  agence:"SST",       lieu:"St Jean de Luz",    date:"2025-12-24", type:"Vitesse",       detail:"71/70 km/h",               points:0, cout:45,   statut:"Dénoncée",  info:"MAIL LABUZAN + PAUVIF LE 22/01 - DENONCE LE /",         commentaire:"" },
+  { id:5,  lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"DUBOS Vincent",  vehicule:"GF-91-VW",   agence:"ESA",       lieu:"Bayonne",           date:"2026-01-19", type:"Stationnement", detail:"Stationnement",            points:0, cout:31.3, statut:"Payée",     info:"PAYEE LE 25/02",                                        commentaire:"" },
+  { id:6,  lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"BOUHOT Olivier",  vehicule:"GR-282-QS",  agence:"EMP",       lieu:"Toulouse",          date:"2026-01-02", type:"Vitesse",       detail:"52/50 km/h",               points:0, cout:90,   statut:"Dénoncée",  info:"DENONCE LE 05/02",                                      commentaire:"" },
+  { id:7,  lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"GUERIN Benjamin",  vehicule:"GW-057-NQ",  agence:"CA CANA",   lieu:"Taillan Médoc",     date:"2026-11-26", type:"Vitesse",       detail:"99/70 km/h",               points:2, cout:90,   statut:"Dénoncée",  info:"DENONCE LE 10/02",                                      commentaire:"" },
+  { id:8,  lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"RIORD Adrien",  vehicule:"GX-024-XJ",  agence:"CA RESO",   lieu:"Trensacq",          date:"2026-01-21", type:"Vitesse",       detail:"108/80 km/h",              points:2, cout:90,   statut:"Dénoncée",  info:"DENONCE LE 29/01",                                      commentaire:"" },
+  { id:9,  lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"RIORD Adrien",  vehicule:"GX-024-XJ",  agence:"CA RESO",   lieu:"Hontanx",           date:"2026-01-21", type:"Vitesse",       detail:"102/80 km/h",              points:2, cout:90,   statut:"Dénoncée",  info:"DENONCE LE 29/01",                                      commentaire:"" },
+  { id:10, lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"RIORD Adrien",  vehicule:"GX-024-XJ",  agence:"CA RESO",   lieu:"Trensacq",          date:"2026-01-22", type:"Vitesse",       detail:"82/80 km/h",               points:0, cout:45,   statut:"Dénoncée",  info:"DENONCE LE 04/02",                                      commentaire:"" },
+  { id:11, lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"RIORD Adrien",  vehicule:"GX-024-XJ",  agence:"CA RESO",   lieu:"Trensacq",          date:"2026-01-23", type:"Vitesse",       detail:"82/80 km/h",               points:0, cout:45,   statut:"Dénoncée",  info:"DENONCE LE 04/02",                                      commentaire:"" },
+  { id:12, lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"LOURENCO CORREIA Joao",  vehicule:"GX-489-WD",  agence:"CA BASSIN", lieu:"Lanton",            date:"2026-01-15", type:"Vitesse",       detail:"82/80 km/h",               points:0, cout:45,   statut:"Dénoncée",  info:"DENONCE LE 10/02",                                      commentaire:"" },
+  { id:13, lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"DESCHAMPS Gilles",  vehicule:"HB-889-GG",  agence:"EMP",       lieu:"Toulouse",          date:"",           type:"Stationnement", detail:"Majoration stationnement",  points:0, cout:64,   statut:"Payée",     info:"PAYEE LE 01/03",                                        commentaire:"" },
+  { id:14, lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"DESCHAMPS Gilles",  vehicule:"HB-889-GG",  agence:"EMP",       lieu:"Toulouse",          date:"",           type:"Stationnement", detail:"Majoration stationnement",  points:0, cout:64,   statut:"Payée",     info:"PAYEE LE 01/03",                                        commentaire:"" },
+  { id:15, lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"DESCHAMPS Gilles",  vehicule:"HB-889-GG",  agence:"EMP",       lieu:"Toulouse",          date:"",           type:"Stationnement", detail:"Majoration stationnement",  points:0, cout:64,   statut:"Payée",     info:"PAYEE LE 01/03",                                        commentaire:"" },
+  { id:16, lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"FERRANDO Roger",  vehicule:"GT-897-NE",  agence:"EMP",       lieu:"Toulouse",          date:"",           type:"Stationnement", detail:"Majoration stationnement",  points:0, cout:64,   statut:"Payée",     info:"PAYEE LE 19/02",                                        commentaire:"" },
+  { id:17, lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"DUBOS Vincent",  vehicule:"GF-91-VW",   agence:"ESA",       lieu:"Bayonne",           date:"2026-12-15", type:"Stationnement", detail:"Stationnement",            points:0, cout:135,  statut:"Contestée", info:"CONTESTATION LE 16/02 - Relance Patricia 25/02",        commentaire:"" },
+  { id:18, lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"DEBROUWERE Gwendoline",  vehicule:"FZ-432-RR",  agence:"AQUALIS",   lieu:"Pessac",            date:"2026-02-06", type:"Vitesse",       detail:"81/80 km/h",               points:0, cout:45,   statut:"Dénoncée",  info:"DENONCE LE 19/02",                                      commentaire:"" },
+  { id:19, lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"AGUILAR Thierry",  vehicule:"HD-175-LD",  agence:"CA RESO",   lieu:"Mérignac",          date:"2026-01-14", type:"Vitesse",       detail:"95/90 km/h",               points:1, cout:45,   statut:"Dénoncée",  info:"DENONCE LE 25/02",                                      commentaire:"" },
+  { id:20, lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"BERNAOLA Thomas",  vehicule:"GK-378-PF",  agence:"CA RESO",   lieu:"St Laurent Arce",   date:"2025-06-06", type:"Vitesse",       detail:"84/80 km/h",               points:0, cout:45,   statut:"Dénoncée",  info:"DENONCE LE 25/02",                                      commentaire:"" },
+  { id:21, lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"OUSSET Cédric",  vehicule:"HD-265-KW",  agence:"EMP",       lieu:"Portet/Garonne",    date:"2026-02-10", type:"Vitesse",       detail:"57/50 km/h",               points:1, cout:90,   statut:"Dénoncée",  info:"DENONCE LE 02/03",                                      commentaire:"" },
+  { id:22, lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"EMP (véhicule)",  vehicule:"GM-246-LR",  agence:"EMP",       lieu:"Toulouse",          date:"2026-02-06", type:"Stationnement", detail:"Stationnement",            points:0, cout:135,  statut:"En cours",  info:"MAIL LUCIE LE 25/02 - conducteur non identifié",        commentaire:"" },
+  { id:23, lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"BLIN Benjamin",  vehicule:"GC-855-MP",  agence:"EMP",       lieu:"Toulouse",          date:"2026-02-06", type:"Stationnement", detail:"Stationnement",            points:0, cout:30,   statut:"En cours",  info:"MAIL LUCIE LE 02/03",                                   commentaire:"" },
+  { id:24, lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"LALEVE Christophe",  vehicule:"GH-367-JV",  agence:"CA CANA",   lieu:"Eaux-Bonnes",       date:"2026-01-25", type:"Stationnement", detail:"Stationnement",            points:0, cout:35,   statut:"En cours",  info:"MAIL CHRISTOPHE LE 27/02 - Relance le 04/03",           commentaire:"" },
+  { id:25, lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"CMR BARON",  vehicule:"FJ-267-NQ",  agence:"CMR BARON", lieu:"St Denis de Pile",  date:"2026-02-18", type:"Vitesse",       detail:"62/50 km/h",               points:1, cout:90,   statut:"Dénoncée",  info:"DENONCE LE 02/03",                                      commentaire:"" },
+  { id:26, lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"BLIN Benjamin",  vehicule:"GC-855-MP",  agence:"EMP",       lieu:"Coulommiers",       date:"2026-02-18", type:"Stationnement", detail:"Stationnement",            points:0, cout:35,   statut:"En cours",  info:"MAIL LUCIE LE 02/03",                                   commentaire:"" },
+  { id:27, lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"ZENGUINIAN Antoine",  vehicule:"GX-882-XH",  agence:"CA RESO",   lieu:"Hontanx",           date:"2026-02-18", type:"Vitesse",       detail:"82/80 km/h",               points:0, cout:45,   statut:"Dénoncée",  info:"DENONCE LE 02/03",                                      commentaire:"" },
+  { id:28, lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"MARTINS Victor",  vehicule:"GR-608-HH",  agence:"EMP",       lieu:"Villematier",       date:"2026-02-13", type:"Vitesse",       detail:"88/80 km/h",               points:1, cout:45,   statut:"En cours",  info:"MAIL LUCIE LE 02/03",                                   commentaire:"" },
+  { id:29, lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"DESCHAMPS Gilles",  vehicule:"HB-889-GG",  agence:"EMP",       lieu:"Toulouse",          date:"",           type:"Stationnement", detail:"Majoration stationnement",  points:0, cout:64,   statut:"En cours",  info:"MAIL LUCIE LE 25/02 - relance le 04/03",                commentaire:"" },
+  { id:"a1", lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"CAZARD Ludovic",  vehicule:"HB-840-GG", agence:"EMP", lieu:"Toulouse", date:"2025-11-21", type:"Stationnement", detail:"Stationnement piste cyclable", points:0, cout:135, statut:"Annulée", info:"CONTESTATION ARRETE LE 21/01", commentaire:"" },
+  { id:"a2", lien_pv:"", lien_denonciation:"", code_parc:"", conducteur:"CAZARD Ludovic",  vehicule:"HB-840-GG", agence:"EMP", lieu:"Toulouse", date:"2025-11-21", type:"Stationnement", detail:"Stationnement trottoir",        points:0, cout:135, statut:"Annulée", info:"CONTESTATION ARRETE LE 21/01", commentaire:"" },
 ];
 
 const AGENCES = ["EMP","CA RESO","CA CANA","CMR BARON","ESA","SST","CA BASSIN","AQUALIS"];
@@ -116,13 +116,14 @@ function ModalEdit({row,setRow,isAdd,onSave,onDelete,onClose}) {
         </h2>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:13}}>
           {[
-            {label:"Conducteur *",k:"conducteur",t:"text",  ph:"NOM Prénom"},
-            {label:"Véhicule",    k:"vehicule",  t:"text",  ph:"AB-123-CD"},
-            {label:"Lieu",        k:"lieu",       t:"text"},
-            {label:"Date",        k:"date",       t:"date"},
-            {label:"Détail",      k:"detail",     t:"text",  ph:"ex: 85/80 km/h"},
-            {label:"Points",      k:"points",     t:"number"},
-            {label:"Coût (€)",    k:"cout",       t:"number"},
+            {label:"Conducteur *",k:"conducteur",  t:"text",   ph:"NOM Prénom"},
+            {label:"Véhicule",    k:"vehicule",    t:"text",   ph:"AB-123-CD"},
+            {label:"Code parc",   k:"code_parc",   t:"text",   ph:"ex: 05001P"},
+            {label:"Lieu",        k:"lieu",         t:"text"},
+            {label:"Date",        k:"date",         t:"date"},
+            {label:"Détail",      k:"detail",       t:"text",   ph:"ex: 85/80 km/h"},
+            {label:"Points",      k:"points",       t:"number"},
+            {label:"Coût (€)",    k:"cout",         t:"number"},
           ].map(f=>(
             <div key={f.k}>
               <label style={{display:"block",fontSize:"0.63rem",textTransform:"uppercase",letterSpacing:".08em",color:"#7a8299",marginBottom:5}}>{f.label}</label>
@@ -204,8 +205,11 @@ function TableTab({search,setSearch,fAgence,setFAgence,fStatut,setFStatut,sortK,
   return (
     <div>
       <div style={{display:"flex",gap:10,marginBottom:16,flexWrap:"wrap",alignItems:"center"}}>
-        <input style={{...FI,flex:1,minWidth:200}} placeholder="🔍  Rechercher conducteur, véhicule, lieu..."
-          value={search} onChange={e=>setSearch(e.target.value)}/>
+        <div style={{flex:1,minWidth:200,position:"relative",display:"flex",alignItems:"center"}}>
+          <input style={{...FI,paddingRight:32}} placeholder="🔍  Rechercher conducteur, véhicule, lieu..."
+            value={search} onChange={e=>setSearch(e.target.value)}/>
+          {search&&<button onClick={()=>setSearch("")} style={{position:"absolute",right:8,background:"none",border:"none",color:"#7a8299",cursor:"pointer",fontSize:"1rem",lineHeight:1,padding:2}}>✕</button>}
+        </div>
         <div style={{display:"flex",gap:5,flexWrap:"wrap"}}>
           {STATUTS.map(s=>(
             <button key={s} onClick={()=>setFStatut(s)}
@@ -239,7 +243,10 @@ function TableTab({search,setSearch,fAgence,setFAgence,fStatut,setFStatut,sortK,
               onMouseLeave={e=>e.currentTarget.style.background=i%2===0?"transparent":"rgba(255,255,255,.01)"}>
               <div style={{fontSize:"0.62rem",color:"#3a3f52"}}>{i+1}</div>
               <div style={{fontSize:"0.78rem",fontWeight:500,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",paddingRight:6}} title={r.conducteur}>{r.conducteur}</div>
-              <div style={{fontSize:"0.72rem",fontFamily:"DM Mono,monospace",color:"#7a8299",paddingRight:6}}>{r.vehicule}</div>
+              <div style={{fontSize:"0.72rem",fontFamily:"DM Mono,monospace",color:"#7a8299",paddingRight:6}}>
+                <div style={{color: r.code_parc?"#e8eaf0":"#7a8299"}}>{r.code_parc||r.vehicule}</div>
+                {r.code_parc&&<div style={{fontSize:"0.65rem",color:"#3a3f52",marginTop:1}}>{r.vehicule}</div>}
+              </div>
               <div style={{fontSize:"0.73rem",color:"#7a8299",paddingRight:6}}>{r.agence}</div>
               <div style={{fontSize:"0.72rem",fontFamily:"DM Mono,monospace",color:"#7a8299",paddingRight:6}}>{fmtDate(r.date)}</div>
               <div style={{fontSize:"0.73rem",color:"#7a8299",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",paddingRight:6}}>{r.lieu||"—"}</div>
@@ -340,8 +347,8 @@ function Dashboard({act,ann,kpi,onEdit}) {
         </div>
         <div style={{marginTop:16,padding:"12px 16px",background:"rgba(240,180,41,.06)",borderRadius:8,border:"1px solid rgba(240,180,41,.1)",fontSize:"0.78rem",color:"#7a8299",display:"flex",gap:24,flexWrap:"wrap"}}>
           <span>💡 <strong style={{color:"#e8eaf0"}}>EMP : {enCoursList.filter(r=>r.agence==="EMP").length}/{enCoursList.length} dossiers</strong> ({enCoursList.filter(r=>r.agence==="EMP").reduce((s,r)=>s+(r.cout||0),0)} €)</span>
-          <span>⚠️ <strong style={{color:"#e8eaf0"}}>GM-246-LR</strong> : conducteur non identifié</span>
-          <span>📅 <strong style={{color:"#e8eaf0"}}>Relances</strong> : 04/03 (Deschamps + Laleve)</span>
+          {enCoursList.some(r=>!r.conducteur||r.conducteur==="EMP (véhicule)")&&<span>⚠️ <strong style={{color:"#e8eaf0"}}>Conducteur non identifié</strong> : {enCoursList.filter(r=>!r.conducteur||r.conducteur==="EMP (véhicule)").map(r=>r.vehicule).join(", ")}</span>}
+          {enCoursList.length>0&&<span>📅 <strong style={{color:"#e8eaf0"}}>En attente</strong> : {enCoursList.map(r=>r.conducteur.split(" ")[0]).join(", ")}</span>}
         </div>
       </div>
 
@@ -451,40 +458,6 @@ function Dashboard({act,ann,kpi,onEdit}) {
         </div>
       </div>
 
-      {/* Annulées */}
-      <div style={{background:"#151820",border:"1px solid #252a3a",borderRadius:16,padding:24}}>
-        <div style={{fontSize:"0.72rem",textTransform:"uppercase",letterSpacing:".1em",color:"#7a8299",marginBottom:18,fontWeight:500,display:"flex",alignItems:"center",gap:8}}>
-          <span style={{width:8,height:8,borderRadius:"50%",background:"#3dd68c",display:"inline-block"}}/> Contraventions annulées (contestations gagnées)
-        </div>
-        <div style={{overflowX:"auto"}}>
-          <table style={{width:"100%",borderCollapse:"collapse",fontSize:"0.82rem"}}>
-            <thead>
-              <tr style={{borderBottom:"1px solid #252a3a"}}>
-                {["Conducteur","Véhicule","Date","Lieu","Agence","Infraction","Coût évité","Note"].map(h=>(
-                  <th key={h} style={{textAlign:"left",padding:"8px 12px",fontSize:"0.68rem",textTransform:"uppercase",letterSpacing:".1em",color:"#7a8299",fontWeight:500}}>{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {ann.map(r=>(
-                <tr key={r.id} style={{borderBottom:"1px solid rgba(255,255,255,.03)"}}>
-                  <td style={{padding:"10px 12px"}}>{r.conducteur}</td>
-                  <td style={{padding:"10px 12px",fontFamily:"DM Mono,monospace",fontSize:"0.78rem",color:"#7a8299"}}>{r.vehicule}</td>
-                  <td style={{padding:"10px 12px",fontFamily:"DM Mono,monospace",fontSize:"0.78rem",color:"#7a8299"}}>{fmtDate(r.date)}</td>
-                  <td style={{padding:"10px 12px"}}>{r.lieu}</td>
-                  <td style={{padding:"10px 12px",color:"#7a8299"}}>{r.agence}</td>
-                  <td style={{padding:"10px 12px"}}>{r.detail}</td>
-                  <td style={{padding:"10px 12px",fontFamily:"DM Mono,monospace",color:"#3dd68c"}}>{r.cout} €</td>
-                  <td style={{padding:"10px 12px",color:"#7a8299",fontSize:"0.8rem"}}>{r.info}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div style={{fontSize:"0.78rem",color:"#7a8299",marginTop:12,paddingTop:12,borderTop:"1px solid #252a3a"}}>
-          ✅ CAZARD Ludovic — économie de <span style={{color:"#f0b429",fontFamily:"DM Mono,monospace"}}>{totalAnnule.toFixed(0)} €</span>
-        </div>
-      </div>
     </div>
   );
 }
@@ -541,7 +514,7 @@ function App() {
   const onSort = k=>{ setSortK(k); setSortD(d=>sortK===k?(d==="asc"?"desc":"asc"):"asc"); };
   const filtered = rows.filter(r=>{
     const q=search.toLowerCase();
-    return (!search||[r.conducteur,r.vehicule,r.lieu,r.agence,r.detail,r.info,r.commentaire].some(v=>v?.toLowerCase().includes(q)))
+    return (!search||[r.conducteur,r.vehicule,r.code_parc,r.lieu,r.agence,r.detail,r.info,r.commentaire].some(v=>v?.toLowerCase().includes(q)))
       &&(fAgence==="Toutes"||r.agence===fAgence)
       &&(fStatut==="Tous"||r.statut===fStatut);
   }).sort((a,b)=>{
@@ -897,7 +870,6 @@ function App() {
         </div>
         <div style={{display:"flex",gap:10,alignItems:"center",flexWrap:"wrap"}}>
           {tab==="table"&&!READ_ONLY&&<button onClick={onAdd} style={{padding:"9px 18px",borderRadius:9,border:"1px solid rgba(61,214,140,.35)",background:"rgba(61,214,140,.12)",color:"#3dd68c",fontSize:"0.82rem",fontWeight:600}}>+ Ajouter</button>}
-          {!READ_ONLY&&<button onClick={exportHTML} style={{padding:"9px 18px",borderRadius:9,border:"1px solid rgba(78,205,196,.35)",background:"rgba(78,205,196,.12)",color:"#4ecdc4",fontSize:"0.82rem",fontWeight:600}}>📤 Exporter</button>}
           {!READ_ONLY&&<button onClick={exportExcel} style={{padding:"9px 18px",borderRadius:9,border:"1px solid rgba(61,214,140,.35)",background:"rgba(61,214,140,.12)",color:"#3dd68c",fontSize:"0.82rem",fontWeight:600}}>📊 Excel</button>}
           {READ_ONLY&&<span style={{padding:"6px 14px",borderRadius:999,background:"rgba(240,180,41,.1)",border:"1px solid rgba(240,180,41,.25)",color:"#f0b429",fontSize:"0.75rem",fontWeight:500}}>👁 Lecture seule</span>}
           <div style={{background:"#1c2030",border:"1px solid #252a3a",padding:"8px 16px",borderRadius:999,fontFamily:"DM Mono,monospace",fontSize:"0.8rem",color:"#7a8299"}}>
